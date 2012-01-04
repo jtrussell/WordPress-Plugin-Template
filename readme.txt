@@ -1,0 +1,7 @@
+=== NOTES ===
+
+=== Build ===
+* Do a global replace on "template_" for "your_slug_"
+* Update options at the top of lib/lib-wp.php to reflect your namespacing
+* Rename main plugin file
+* Update plugin header comments and readme file
