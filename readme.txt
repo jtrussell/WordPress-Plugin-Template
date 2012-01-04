@@ -1,4 +1,5 @@
 === NOTES ===
+Still in early stages - try checking back later!
 
 === Build ===
 * Do a global replace on "template_" for "your_slug_"
