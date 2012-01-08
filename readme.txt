@@ -1,8 +1,15 @@
-=== NOTES ===
-Still in early stages - try checking back later!
+=== WP Plugin Template ===
+Contributors: The people who worked on this plugin
+Tags: Plugin Tempate
+Requires at least: 3.0
+Tested up to: 3.1
+Stable tag: 1.0.0
+License: GPLv2 or later
 
-=== Build ===
-* Do a global replace on "template_" for "your_slug_"
-* Update options at the top of lib/lib-wp.php to reflect your namespacing
-* Rename main plugin file
-* Update plugin header comments and readme file
+Does some sweet stuff
+
+== Description ==
+
+== Installation ==
+
+== Change Log ==
