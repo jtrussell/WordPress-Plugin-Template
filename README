@@ -1,8 +1,11 @@
 == NOTES ==
 Still in early stages - try checking back later!
 
-== Build ==
-* Do a global replace on "template_" for "your_slug_"
-* Update options at the top of lib/lib-wp.php to reflect your namespacing
-* Rename main plugin file
-* Update plugin header comments and readme file
+== Building your Plugin ==
+* Update "_deploy/options.py" to reflect your projects namespacing
+* Open a terminal and cd into the "_deploy" folder
+* Run "python deploy.py"
+*** This will rename variious classes and options to use your plugin's namespace
+*** (Essentially it's doing a global find and replace for "template_" to "your_slug_" then moving a readme.txt file into the main plugin folder)
+* Delete the _deploy folder
+
