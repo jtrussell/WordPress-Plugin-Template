@@ -37,7 +37,7 @@ class template_wp
 		if(strlen($group) === 0) {
 			$group = self::$option_group;
 		}
-		register_setting($group, self::option_name($opt));
+		register_setting($group, self::option_name($key));
 	}
 
 	// -----------------------------------------------------
@@ -89,7 +89,7 @@ class template_wp
 
 	public static function register_settings() {
 		$group = self::$option_group;
-		self::register_setting($group, "my_option");
+		self::register_setting("my_option", $group);
 	}
 
 }
