@@ -7,13 +7,16 @@
 			<tbody>
 				<!-- My Option -->
 				<?php
-					$name 	= template_wp::option_name("my_option");
-					$id		= template_wp::option_name("my_option");
-					$value	= template_wp::get_option("my_option");
+					$option	= "my_option";
+					$label	= "My Option";
+					$title	= "title text";
+					$name 	= template_wp::option_name($option);
+					$id		= template_wp::option_name($option);
+					$value	= template_wp::get_option($option);
 				?>
-				<tr valign="top">
+				<tr valign="top" title="<?php echo $title ?>">
 					<th>
-						<label for="<?php echo $id; ?>">My Option</label>
+						<label for="<?php echo $id; ?>"><?php echo $label ?></label>
 					</th>
 					<td>
 						<input name="<?php echo $name; ?>" value="<?php echo $value; ?>" id="iha_service_provder_id" type="text" class="regular-text" />
