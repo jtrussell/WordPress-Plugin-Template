@@ -19,7 +19,7 @@
 						<label for="<?php echo $id; ?>"><?php echo $label ?></label>
 					</th>
 					<td>
-						<input name="<?php echo $name; ?>" value="<?php echo $value; ?>" id="iha_service_provder_id" type="text" class="regular-text" />
+						<input name="<?php echo $name; ?>" value="<?php echo $value; ?>" id="<?php echo $id ?>" type="text" class="regular-text" />
 					</td>
 				</tr><!-- End My Option -->
 
