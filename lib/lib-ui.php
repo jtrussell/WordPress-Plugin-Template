@@ -37,7 +37,7 @@ class template_ui
 		if(file_exists($this_dir . "/../css/{$page}.css")) {
 			wp_enqueue_style(template_wp::$plugin_name . "-{$page}-style", $plugin_dir_uri . "/css/{$page}.css");
 		}
-		if(file_exists($this_dir . "/../css/{$page}.js")) {
+		if(file_exists($this_dir . "/../js/{$page}.js")) {
 			wp_enqueue_script(template_wp::$plugin_name . "-{$page}-script", $plugin_dir_uri . "/js/{$page}.js");
 		}
 	}
