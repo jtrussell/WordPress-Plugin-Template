@@ -7,7 +7,9 @@ Features
 --------
 * All files in the ./lib folder are included by the main plugin script
 * All reusable, or standardizable, code should live in ./lib
-* The stock version of this template contains an empty ./lib folder - it is suggested that you should include the "WordPress Plugin Script Library" as a submodule here as follows (after removing the empty ./lib folder):
+* The stock version of this template contains an empty ./lib folder - it is suggested 
+that you should include the "WordPress Plugin Script Library" as a submodule here as 
+follows (after removing the empty ./lib folder):
 
 	git submodule add git://github.com/jtrussell/WordPress-Plugin-Script-Library.git lib
 
