@@ -18,6 +18,7 @@ Features
 Getting your plugin ready
 -------------------------
 Eventually there will be a configurable deploy script, but for now...
+
 * Do a global find/replace on "tempate_" for "your_plugin_slug_"
 * Update _deploy/readme.txt and move it to the root directory
 * Delete the _deploy folder
