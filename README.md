@@ -11,7 +11,9 @@ Features
 that you should include the "WordPress Plugin Script Library" as a submodule here as 
 follows (after removing the empty ./lib folder):
 
-    git submodule add git://github.com/jtrussell/WordPress-Plugin-Script-Library.git lib
+~~~
+git submodule add git://github.com/jtrussell/WordPress-Plugin-Script-Library.git lib
+~~~
 
 * Try to avoid bloating your main plugin script with function declarations
 * Library files - or classes with all static methods - should be prefixed with "lib-"
