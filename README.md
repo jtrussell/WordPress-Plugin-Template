@@ -17,6 +17,7 @@ git submodule add git://github.com/jtrussell/WordPress-Plugin-Script-Library.git
 * Try to avoid bloating your main plugin script with function declarations
 * Library files - or classes with all static methods - should be prefixed with "lib-"
 * Proper class files should be prefixed with "class-"
+* Other php files in the "./lib" folder will not be automatically included
 
 Getting your plugin ready
 -------------------------
