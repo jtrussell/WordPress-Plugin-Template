@@ -57,6 +57,12 @@
 	$shortOptions .= "n::";
 	$longOptions[] = "name::";
 
+	# Library Repo Branch to use
+	$longOptions[] = "download-library-branch::";
+
+	$shortOptions .= "l::";
+	$longOptions[] = "lib::";
+
 	# Now parse the actual input
 	$opts = getopt( $shortOptions, $longOptions );
 
@@ -65,7 +71,9 @@
 	// -----------------------------------------------------
 	$errors = array();
 	$dir = __DIR__;
-	$lib = $dir . "/lib";
+	$libDirName = optVal( $opts, "l", "library", "lib" );
+	# [todo] is lib dir absolute? [/todo]
+	$lib = $dir . "/" . $libDirName;
 	$base = basename( __DIR__ );
 	$name = optVal( $opts, "n", "name", $base );
 	$downloadLibs = array(
@@ -111,6 +119,7 @@
 	// -----------------------------------------------------
 	section( "Final Confirmation" );
 	writeln( "Plugin will be named: $name" );
+	writeln( "Library dir: $lib" );
 	writeln( "Fetch library scripts: " . ( empty( $downloadLibs ) ? "(none)" : implode( ", ", $downloadLibs ) ) );
 	prompt( "OK to proceed with setup? (Y/n)" );
 	$input = readln( "Y" );
