@@ -27,9 +27,16 @@ By default scripts are fetched form the
 repo.
 
 ### Options
-You can configure the `setup.php` routine by making use of the following options:
+You can configure the setup process by editing the `setup.ini` file.
+
+You can also alter the setup routine at run time by making use of the following options:
 * `-n`/`--name`: The name of your plugin (you will be prompted to confirm this
 	option if you do not specify a value explicitly. e.g. `-n=awesome`.
 * `-l`/`--library`: Where to save your library scripts, defaults to "./lib".
 * `--downloadLibBranch`: The branch to pull on the script library repo, defaults
 	to "master".
+
+## TODO
+
+* Read ini file for setup script
+* Use underscores instead of camelCase in setup sript (WP Style)

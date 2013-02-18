@@ -1,5 +1,13 @@
 <?php
-	
+
+	// -----------------------------------------------------
+	// Anything in our setup.ini file?
+	// - - -
+	// Assumes a `setup.ini` file lives next to this script
+	// -----------------------------------------------------
+	$setupIniFile = "setup.ini";
+	$ini = file_exists( $setupIniFile ) ? parse_ini_file( $setupIniFile ) : array();
+
 	// -----------------------------------------------------
 	// We'll be doing a lot of echos + line breaks
 	// -----------------------------------------------------
@@ -76,6 +84,10 @@
 	$lib = $dir . "/" . $libDirName;
 	$base = basename( __DIR__ );
 	$name = optVal( $opts, "n", "name", $base );
+
+	// -----------------------------------------------------
+	// [IMPLEMENT /] Read this from an ini file
+	// -----------------------------------------------------
 	$downloadLibs = array(
 		"lib-io",
 		"lib-ui",
