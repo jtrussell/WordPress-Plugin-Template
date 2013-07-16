@@ -1,8 +1,8 @@
 <div class="wrap">
 	<div id="icon-options-general" class="icon32"></div>
-	<h2><?php echo template_wp::$plugin_name; ?> Settings</h2>
+	<h2><?php echo {{plugin_ns}}_wp::$plugin_name; ?> Settings</h2>
 	<form action="options.php" method="post">
-		<?php settings_fields(template_wp::$option_group); ?>
+		<?php settings_fields({{plugin_ns}}_wp::$option_group); ?>
 		<table class="form-table">
 			<tbody>
 				<!-- My Option -->
@@ -10,9 +10,9 @@
 					$option	= "my_option";
 					$label	= "My Option";
 					$title	= "title text";
-					$name 	= template_wp::option_name($option);
-					$id		= template_wp::option_name($option);
-					$value	= template_wp::get_option($option);
+					$name 	= {{plugin_ns}}_wp::option_name($option);
+					$id		= {{plugin_ns}}_wp::option_name($option);
+					$value	= {{plugin_ns}}_wp::get_option($option);
 				?>
 				<tr valign="top" title="<?php echo $title ?>">
 					<th>

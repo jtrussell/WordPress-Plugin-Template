@@ -49,7 +49,7 @@
 		return $default;
 	}
 
-	function optVal( $opts, $short, $long, $default="" ) {
+	function opt_val( $opts, $short, $long, $default="" ) {
 		if( $short && isset( $opts[$short] ) ) { return $opts[$short]; }
 		if( $long && isset( $opts[$long] ) ) { return $opts[$long]; }
 		return $default;
@@ -65,11 +65,25 @@
 	$shortOptions .= "n::";
 	$longOptions[] = "name::";
 
-	# Library Repo Branch to use
-	$longOptions[] = "download-library-branch::";
+  # Plugin Namespace
+	$shortOptions .= "s::";
+	$longOptions[] = "namespace::";
 
-	$shortOptions .= "l::";
-	$longOptions[] = "lib::";
+  # Plugin URI
+	$shortOptions .= "p::";
+	$longOptions[] = "puri::";
+
+  # Plugin Version
+	$shortOptions .= "v::";
+	$longOptions[] = "version::";
+
+  # Author Name
+	$shortOptions .= "a::";
+	$longOptions[] = "author::";
+   
+  # Author URI
+	$shortOptions .= "u::";
+	$longOptions[] = "auri::";
 
 	# Now parse the actual input
 	$opts = getopt( $shortOptions, $longOptions );
@@ -79,25 +93,14 @@
 	// -----------------------------------------------------
 	$errors = array();
 	$dir = __DIR__;
-	$libDirName = optVal( $opts, "l", "library", "lib" );
-	# [todo] is lib dir absolute? [/todo]
-	$lib = $dir . "/" . $libDirName;
 	$base = basename( __DIR__ );
-	$name = optVal( $opts, "n", "name", $base );
 
-	// -----------------------------------------------------
-	// [IMPLEMENT /] Read this from an ini file
-	// -----------------------------------------------------
-	$downloadLibs = array(
-		"lib-io",
-		"lib-ui",
-		"lib-util",
-		"lib-wp"
-	);
-
-	# Where to get library scripts from
-	$downloadLibBranch = optVal( $opts, false, "downloadLibBranch", "master" );
-	$downloadLibRoot = "https://raw.github.com/jtrussell/WordPress-Plugin-Script-Library/" . $downloadLibBranch;
+	$name = opt_val( $opts, "n", "name", $base );
+  $ns = opt_val( $opts, "s", "namespace", "tpl" );
+  $puri = opt_val( $opts, "p", "puri", "http://myplugin.com" );
+  $version = opt_val( $opts, "v", "version", "0.0.1" );
+  $author_name = opt_val( $opts, "a", "author" );
+  $author_uri = opt_val( $opts, "u", "auri", "http://mysite.com" );
 
 	// -----------------------------------------------------
 	// Prompt the user for anything we need but don't have
@@ -109,73 +112,42 @@
 		$name = readln( $name );
 	}
 
-	# Should we fetch our lib scripts? (probably)
-	section( "Library Scripts" );
-	prompt( "Should I fetch fresh copies of *all* library scripts? (Y/n)" );
-	$input = readln( "Y" );
-	# If not check on each script individually
-	if( $input !== "Y" && $input !== "y" ) {
-		$scriptsTMP = array();
-		foreach( $downloadLibs as $script ) {
-			prompt( "--> Should I fetch a fresh copy of $script? (Y/n)" );
-			$input = readln( "Y" );
-			if( $input === "Y" || $input === "y" ) {
-				$scriptsTMP[] = $script;
-			}
-		}
-		$downloadLibs = $scriptsTMP;
-	}
+  prompt( "What would you like to use as an internal namespace (i.e. class prefix) for your plugin? ($ns)" );
+  $ns = readln( $ns );
+
+  prompt( "What will be the uri this plugin? ($puri)" );
+  $puri = readln( $puri );
+
+  prompt( "What should be in the initial plugin version? ($version)" );
+  $version = readln( $version );
+
+  prompt( "What is the author's name? (that's you)" );
+  $author_name = readln( "" );
+
+  prompt( "What is the author's uri? ($author_uri)" );
+  $author_uri = readln( $author_uri );
 
 	// -----------------------------------------------------
 	// Get final confirmation before running the init routines
 	// -----------------------------------------------------
 	section( "Final Confirmation" );
 	writeln( "Plugin will be named: $name" );
-	writeln( "Library dir: $lib" );
-	writeln( "Fetch library scripts: " . ( empty( $downloadLibs ) ? "(none)" : implode( ", ", $downloadLibs ) ) );
+  writeln( "Using internal namespaces: $ns" );
+  writeln( "Plugin uri: $puri" );
+  writeln( "Plugin version: $version" );
+  writeln( "Author's name: $author_name" );
+  writeln( "Author's uri: $author_uri" );
 	prompt( "OK to proceed with setup? (Y/n)" );
 	$input = readln( "Y" );
 	if( $input !== "y" && $input !== "Y" ) {
 		writeln( "Setup canceled." );
 		exit;
-	}
+  }
 
 	// -----------------------------------------------------
 	// We've got the green light... lets do this!
 	// -----------------------------------------------------
-
-	// -----------------------------------------------------
-	// Fetch library scripts - must be done before templating
-	// -----------------------------------------------------
-	if( empty( $errors ) ): // START: library fetching
-	if( !empty( $downloadLibs ) ) {
-		section( "Fetching library scripts" );
-		# Create our lib directory if it doesn't exist
-		if( file_exists( $lib ) ) {
-			if( !is_dir( $lib ) ) {
-				$errors[] = "$lib must be a directory, not a file.";
-			}
-		} else {
-			if( !mkdir( $lib, 0777, true ) ) {
-				$errors[] = "Failed to create $lib do you have sufficient privileges to create this directory?";
-			}
-		}
-		# Download each script
-		foreach( $downloadLibs as $script ) {
-			writeln( "--> Fetching $script... " );
-			$contents = file_get_contents( "$downloadLibRoot/$script.php" );
-			if( FALSE === $contents ) {
-				$errors[] = "Could not fetch library script: $script";
-			} else {
-				if( FALSE === file_put_contents( "$lib/$script.php", $contents ) ) {
-					$errors[] = "Could not write file $lib/$script.php";
-				} else {
-					write( "done." );
-				}
-			}
-		}
-	}
-	endif; // END: library fetching
+  writeln( "Aite, let's do this." );
 		
 	// -----------------------------------------------------
 	// Run templating
@@ -183,7 +155,7 @@
 	if( empty( $errors ) ): // START: templating
 
 		# [implement]
-		# Mustache style templating on our library scripts and plugin files
+		# Mustache style templating on our plugin files
 		# [/implement]
 
 	endif; // END: templating

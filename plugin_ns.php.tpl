@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: {{plugin-name}}
-Plugin URI: {{plugin-uri}}
-Description: {{plugin-desc}}
-Version: {{plugin-version}}
-Author: {{author-name}}
-Author URI: {{author-uri}}
+Plugin Name: {{plugin_name}}
+Plugin URI: {{plugin_uri}}
+Description: {{plugin_desc}}
+Version: {{plugin_version}}
+Author: {{author_name}}
+Author URI: {{author_uri}}
 */
 
 // -----------------------------------------------------
@@ -32,14 +32,14 @@ if ($handle = opendir($lib_dir)) {
 // -----------------------------------------------------
 // Register our options menu item and options page
 // -----------------------------------------------------
-add_action("admin_menu", "{{plugin-ns}}_ui::print_plugin_menu");
+add_action("admin_menu", "{{plugin_ns}}_ui::print_plugin_menu");
 
 // -----------------------------------------------------
 // Activation, Deactivation, and Install routines
 // -----------------------------------------------------
-register_activation_hook(__FILE__, "{{plugin-ns}}_wp::set_options");
-register_deactivation_hook(__FILE__, "{{plugin-ns}}_wp::unset_options");
-add_action("admin_init", "{{plugin-ns}}_wp::register_settings");
+register_activation_hook(__FILE__, "{{plugin_ns}}_wp::set_options");
+register_deactivation_hook(__FILE__, "{{plugin_ns}}_wp::unset_options");
+add_action("admin_init", "{{plugin_ns}}_wp::register_settings");
 
 // -----------------------------------------------------
 // Closing php tag omitted
