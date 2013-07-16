@@ -21,7 +21,7 @@ if ($handle = opendir($lib_dir)) {
 	while (false !== ($file = readdir($handle))) {
 		// Don't include hidden files or directories
 		$file_path = $lib_dir . "/" . $file;
-		if (preg_match("/(lib|class)-[\w-]+\.php/", $file_path) && is_file($file_path)) { 
+		if (preg_match("/(svc|class)-[\w-]+\.php/", $file_path) && is_file($file_path)) { 
 			// Do Something with file
 			include_once($file_path);
 		}
